@@ -20,7 +20,7 @@ python3 setup.py install
 
 # Configuration
 
-Configuration is done in the .ccdl-config in user home.
+Configuration is done in $HOME/.ccdl-config 
 
 Config file looks like this:
 
@@ -42,3 +42,17 @@ Config file looks like this:
    "use_avconv": false
 }
 ```
+
+
+In shows you configure how a show is detected and where the merged file should be copied.
+
+In fallback_dir you define the directory where all other files should be copied
+
+use_avconv defines if ffmpeg or avconv is used to pos process the videos
+
+
+# Prerequisites
+
+* MP4Box
+* ffmpeg or avconv
+* python3
