@@ -43,7 +43,10 @@ class CcDownload:
     i = 1
     for file_name in sorted(os.listdir(os.getcwd())):
       file_name_out = str(i) + "_out.mp4"
-      subprocess.call("ffmpeg -i \"" + file_name + "\" -c copy \"" + file_name_out + "\"", shell=True)
+      if self.config_data["use_avconv"]:
+        subprocess.call("avconv -i \"" + file_name + "\" -c copy \"" + file_name_out + "\"", shell=True)
+      else:
+        subprocess.call("ffmpeg -i \"" + file_name + "\" -c copy \"" + file_name_out + "\"", shell=True)
       mp4boxcall = mp4boxcall + " -cat \"" + file_name_out + "\""
       i = i + 1
     mp4boxcall = mp4boxcall + " -new " + self.new_filename
