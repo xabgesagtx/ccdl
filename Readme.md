@@ -56,3 +56,4 @@ use_avconv defines if ffmpeg or avconv is used to pos process the videos
 * MP4Box
 * ffmpeg or avconv
 * python3
+* setuptools
