@@ -1,0 +1,13 @@
+#! /usr/bin/python3
+from ccdl import CcDownload
+import sys
+
+
+
+if __name__ == "__main__":
+  if len(sys.argv) < 2:
+    print("Usage: ccdl DOWNLOAD_URL")
+    sys.exit(1)
+  cc_dl = CcDownload()
+  return_value = cc_dl.run(sys.argv[1])
+  sys.exit(return_value)
