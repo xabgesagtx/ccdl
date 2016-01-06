@@ -39,19 +39,16 @@ class CcDownload:
 
   def merge(self):
     print(Fore.GREEN + "\nMerging files" + Style.RESET_ALL)
-    mp4boxcall = "MP4Box"
+    new_files = []
     i = 1
     for file_name in sorted(os.listdir(os.getcwd())):
-      file_name_out = str(i) + "_out.mp4"
-      if self.config_data["use_avconv"]:
-        subprocess.call("avconv -i \"" + file_name + "\" -c copy \"" + file_name_out + "\"", shell=True)
-      else:
-        subprocess.call("ffmpeg -i \"" + file_name + "\" -c copy \"" + file_name_out + "\"", shell=True)
-      mp4boxcall = mp4boxcall + " -cat \"" + file_name_out + "\""
+      file_name_out = str(i) + "_out.ts"
+      subprocess.call("avconv -ss 0 -i \"" + file_name + "\" -vcodec libx264 -acodec aac -bsf:v h264_mp4toannexb -f mpegts -strict experimental -y \"" + file_name_out + "\"", shell=True)
+      new_files.append(file_name_out)
       i = i + 1
-    mp4boxcall = mp4boxcall + " -new " + self.new_filename
-    print(mp4boxcall)
-    subprocess.call(mp4boxcall, shell=True)
+    mergecall = "avconv -i concat:\"" + "|".join(new_files) + "\" -c copy -bsf:a aac_adtstoasc -y \"" + self.new_filename + "\""
+    print(mergecall)
+    subprocess.call(mergecall, shell=True)
 
   def set_url(self, url):
     self.url = url
@@ -112,7 +109,7 @@ class CcDownload:
       self.merge()
       self.copy()
     except:
-      print(Fore.RED + "\nUnexpected error:", sys.exc_info()[0] + "\n" + Style.RESET_ALL)
+      print(Fore.RED + "\nUnexpected error:" + str(sys.exc_info()[0]) + "\n" + Style.RESET_ALL)
       return 1
     finally:
       try:

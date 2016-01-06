@@ -38,8 +38,7 @@ Config file looks like this:
         "regex": "the-nightly-show"
      }
    ],
-   "fallback_dir": "~/temp/",
-   "use_avconv": false
+   "fallback_dir": "~/temp/"
 }
 ```
 
@@ -48,12 +47,9 @@ In shows you configure how a show is detected and where the merged file should b
 
 In fallback_dir you define the directory where all other files should be copied
 
-use_avconv defines if ffmpeg or avconv is used to pos process the videos
-
 
 # Prerequisites
 
-* MP4Box
-* ffmpeg or avconv
+* avconv
 * python3
 * setuptools

@@ -1,3 +1,4 @@
 build/
 dist/
 ccdl.egg-info/
+__pycache__
