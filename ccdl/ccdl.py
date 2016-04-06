@@ -22,14 +22,13 @@ class CcDownload:
     return success
     
 
-  def get_new_filename(self):
+  def get_new_filename(self, show, text):
     print(Fore.GREEN + "\nDetermining new file name" + Style.RESET_ALL)
-    first_file = os.listdir(self.temp_dir)[0]
-    episodepattern = re.compile("\s(\d\d)(\d\d\d)\s")
-    match = episodepattern.search(first_file)
+    episodepattern = re.compile("(\d\d)(\d\d\d)/*$")
+    match = episodepattern.search(text)
     season = match.group(1)
     episode = match.group(2)
-    self.new_filename = self.show + "." + "S" + season + "E" + episode + ".mp4"
+    return show + "." + "S" + season + "E" + episode + ".mp4"
 
   def create_temp_dir(self):
     print(Fore.GREEN + "\nCreating temporary folder" + Style.RESET_ALL)
@@ -105,7 +104,7 @@ class CcDownload:
       if not download:
         return 1
       self.download()
-      self.get_new_filename()
+      self.new_filename = self.get_new_filename(self.show,self.url)
       self.merge()
       self.copy()
     except:
