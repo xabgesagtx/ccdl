@@ -1,5 +1,7 @@
 # ccdl #
 
+[![Build Status](https://travis-ci.org/xabgesagtx/ccdl.svg?branch=master)](https://travis-ci.org/xabgesagtx/ccdl)
+
 This is a python adapter to easily download content from Comedy Central via YoutubeDL
 
 URL for show is first command line parameter.
