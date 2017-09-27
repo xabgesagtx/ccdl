@@ -24,7 +24,7 @@ class CcDownload:
 
   def get_new_filename(self, show, text):
     print(Fore.GREEN + "\nDetermining new file name" + Style.RESET_ALL)
-    episodepattern = re.compile("(\d\d)(\d\d\d)/*$")
+    episodepattern = re.compile("ep-(\d+)(\d\d\d)/*$")
     match = episodepattern.search(text)
     season = match.group(1)
     episode = match.group(2)
